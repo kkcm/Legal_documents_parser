@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class StructBuilder {
     ArrayList<String> textInfo = new ArrayList<>();
+    ArrayList<Article> articles = new ArrayList<>();
 
     public StructBuilder() {
         textInfo.add("to będzie artykuł");
