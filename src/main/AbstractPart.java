@@ -11,9 +11,24 @@ public class AbstractPart implements IPart {
         this.body = in;
     }
 
+    public void setUp(IPart part){
+        this.up = part;
+    }
+
+    public void setDown(IPart part){
+        this.down = part;
+    }
+
     public String toString() {
         return "tymczasowe body: "+ this.body;
     }
 
+    public IPart getUp (){
+        return this.up;
+    }
+
+    public IPart getDown(){
+        return  this.down;
+    }
 
 }

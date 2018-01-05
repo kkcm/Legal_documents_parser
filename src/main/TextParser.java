@@ -42,7 +42,7 @@ public class TextParser {
         patternStrings.add(singlePatternString);
 
 
-        String subtitlePatternString = "[A-Z | \\t]++";
+        String subtitlePatternString = "[A-ZŻŹĆĄŚĘŁÓŃ | \\, | \\t]++";
         patternStrings.add(subtitlePatternString);
     }
 

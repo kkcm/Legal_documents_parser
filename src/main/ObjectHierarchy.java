@@ -8,6 +8,7 @@ public class ObjectHierarchy {
     public ObjectHierarchy(){
         objects.add(new Chapter());
         objects.add(new Subtitle());
+        objects.add(new Article());
 
     }
 

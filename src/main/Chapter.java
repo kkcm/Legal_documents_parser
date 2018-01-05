@@ -4,6 +4,8 @@ public class Chapter extends AbstractPart implements IPart{
 
     public Chapter (){
         this.description = "stworzyłem rozdział";
+        this.up = null;
+        this.down = null;
     }
 
 

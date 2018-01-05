@@ -52,8 +52,8 @@ public class Main {
                 textLine = bufferedReader.readLine();
             } while(textLine != null);
 
+            textInfos.printTableOfContents();
             bufferedReader.close();
-
 
         } catch (ParseException ex){
 
