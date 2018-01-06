@@ -5,6 +5,8 @@ public class AbstractPart implements IPart {
     protected String description;
     protected String body;
     protected IPart down;
+    protected IPart right;
+    protected IPart left;
 //    private Body body;
 
     public void saveLine (String in){
@@ -29,6 +31,22 @@ public class AbstractPart implements IPart {
 
     public IPart getDown(){
         return  this.down;
+    }
+
+    public IPart getRight(){
+        return  this.right;
+    }
+
+    public IPart getLeft(){
+        return  this.left;
+    }
+
+    public void setRight(IPart part){
+        this.right = part;
+    }
+
+    public void setLeft(IPart part){
+        this.left = part;
     }
 
 }

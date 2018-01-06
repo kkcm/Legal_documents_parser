@@ -8,6 +8,14 @@ public interface IPart {
 
     void setDown(IPart part);
 
+    void setRight(IPart part);
+
+    void setLeft(IPart part);
+
+    IPart getRight();
+
+    IPart getLeft();
+
     String toString();
 
     IPart getUp ();

@@ -9,6 +9,8 @@ public class ObjectHierarchy {
         objects.add(new Chapter());
         objects.add(new Subtitle());
         objects.add(new Article());
+        objects.add(new Paragraph());
+        objects.add(new Point());
 
     }
 
@@ -20,7 +22,7 @@ public class ObjectHierarchy {
                 Integer a;
                 for (a = i; a<objects.size(); a++){
                     if (objects.get(a).getClass().isAssignableFrom(o2.getClass())){
-                        System.out.println("klasa 2 nie jest wyżej w hierarchi");
+                        System.out.println("klasa 2 NIE jest wyżej w hierarchi");
                         return false;
                 }
             }
