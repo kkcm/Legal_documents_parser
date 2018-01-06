@@ -6,6 +6,7 @@ public class ObjectHierarchy {
     private ArrayList<Object> objects = new ArrayList<>();
 
     public ObjectHierarchy(){
+        objects.add(new Title());
         objects.add(new Chapter());
         objects.add(new Subtitle());
         objects.add(new Article());

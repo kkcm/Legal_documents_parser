@@ -11,6 +11,9 @@ public class TextParser {
     private ArrayList<Boolean> matches = new ArrayList<>();
 
     public TextParser() {
+        String titlePatternString = "KONSTYTUCJA|RZECZYPOSPOLITEJ POLSKIEJ";
+        patternStrings.add(titlePatternString);
+
         String articlePatternString = "Art..*";
         patternStrings.add(articlePatternString);
 
@@ -44,6 +47,7 @@ public class TextParser {
 
         String subtitlePatternString = "[A-ZŻŹĆĄŚĘŁÓŃ | \\, | \\t]++";
         patternStrings.add(subtitlePatternString);
+
     }
 
     public void createPattern (){

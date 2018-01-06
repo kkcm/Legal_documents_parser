@@ -13,6 +13,11 @@ public class AbstractPart implements IPart {
         this.body = in;
     }
 
+    public void addLine (String in){
+        TextEditor textEditor = new TextEditor();
+        this.body = textEditor.addText(this.body, in);
+    }
+
     public void setUp(IPart part){
         this.up = part;
     }

@@ -12,6 +12,8 @@ public interface IPart {
 
     void setLeft(IPart part);
 
+    void addLine (String in);
+
     IPart getRight();
 
     IPart getLeft();

@@ -52,7 +52,12 @@ public class Main {
                 textLine = bufferedReader.readLine();
             } while(textLine != null);
 
-            textInfos.printTableOfContents();
+         //   textInfos.printTableOfContents();
+
+         TextPrinter textPrinter = new TextPrinter();
+         textPrinter.printAll(textInfos);
+
+
             bufferedReader.close();
 
         } catch (ParseException ex){

@@ -9,6 +9,7 @@ public class StructBuilder {
     private IPart lastParagraph = new Paragraph();
 
     public StructBuilder() {
+        textInfo.add("to będzie tytuł");
         textInfo.add("to będzie artykuł");
         textInfo.add("to będzie dział");
         textInfo.add("to będzie rozdział");
@@ -32,6 +33,51 @@ public class StructBuilder {
                 System.out.println(textInfo.get(i) +" numer: "+ numbers[0]);
                 test = true;
 
+                if(textInfo.get(i).equals("to pominiemy, bo pojedyncza litera/cyfra")){
+                    break;
+                }
+
+                if(textInfo.get(i).equals("to będzie tytuł")){
+                    System.out.println("wszedłem w tytuł");
+                    Title newTitle = new Title();
+
+                    this.last = newTitle;
+                    newTitle.saveLine(in);
+                    System.out.println(newTitle.toString());
+                    break;
+                }
+
+                if (textInfo.get(i).equals("to będzie rozdział")){
+                    System.out.println("wszedłem w rozdział");
+                    Chapter newChapter = new Chapter();
+
+                    ObjectHierarchy hierarchy = new ObjectHierarchy();
+                    if (!hierarchy.isHigher(this.last, newChapter)){
+                        newChapter.setUp(this.last);
+                        this.last.setDown(newChapter);
+                    }
+
+                    this.last = newChapter;
+                    newChapter.saveLine(in);
+                    System.out.println(newChapter.toString());
+                }
+
+                if (textInfo.get(i).equals("to będzie podtytuł")){
+                    System.out.println("wszedłem w podtytuł");
+                    Subtitle newSubtitle = new Subtitle();
+
+                    ObjectHierarchy hierarchy = new ObjectHierarchy();
+                    if (!hierarchy.isHigher(this.last, newSubtitle)){
+                        newSubtitle.setUp(this.last);
+                        this.last.setDown(newSubtitle);
+                    }
+
+                    this.last = newSubtitle;
+                    newSubtitle.saveLine(in);
+                    System.out.println(newSubtitle.toString());
+                }
+
+
                 if (textInfo.get(i).equals("to będzie artykuł")){
                     System.out.println("wszedłem w artykuł");
                     Article newArticle = new Article();
@@ -53,28 +99,6 @@ public class StructBuilder {
                     System.out.println(newArticle.toString());
                 }
 
-                if (textInfo.get(i).equals("to będzie rozdział")){
-                    System.out.println("wszedłem w rozdział");
-                    Chapter newChapter = new Chapter();
-                    this.last = newChapter;
-                    newChapter.saveLine(in);
-                    System.out.println(newChapter.toString());
-                }
-
-                if (textInfo.get(i).equals("to będzie podtytuł")){
-                    System.out.println("wszedłem w podtytuł");
-                    Subtitle newSubtitle = new Subtitle();
-
-                    ObjectHierarchy hierarchy = new ObjectHierarchy();
-                    if (!hierarchy.isHigher(this.last, newSubtitle)){
-                        newSubtitle.setUp(this.last);
-                        this.last.setDown(newSubtitle);
-                    }
-
-                    this.last = newSubtitle;
-                    newSubtitle.saveLine(in);
-                    System.out.println(newSubtitle.toString());
-                }
 
                 if(textInfo.get(i).equals("to będzie ustęp")){
                     System.out.println("wszedłem w ustęp");
@@ -132,10 +156,11 @@ public class StructBuilder {
         }
         if (!test){
             System.out.println("ten fragment będzie zapisany jako body");
+            this.last.addLine(in);
         }
     }
 
-    public void printTableOfContents(){
+ /*   public void printTableOfContents(){
 
         for (Article article : this.articles){
             IPart part = article;
@@ -152,41 +177,6 @@ public class StructBuilder {
 
             writePart(part);
 
-     /*        System.out.println(part.toString());
-
-            IPart part2 = part;
-            part2.getDown();
-
-            while (part2 != null){
-                System.out.println(part2.toString());
-                part2 = part2.getDown();
-
-            }
-
-           while (part.getDown() != null){
-                System.out.println(part.toString());
-                part = part.getDown();
-                System.out.println("schodzę w dół pod artykułem");
-            }
-
-            IPart part2 = part;
-            while (part.getUp() != null && !part.getClass().isAssignableFrom(article.getClass())){
-                part2 = part;
-                while (part2.getRight() != null){
-                    part2.getRight();
-                    System.out.println(part2.getDown().toString());
-                    System.out.println("wypisałem odgałęzienie");
-                }
-                part.getUp();
-                System.out.println("wchodzę w górę pod artykułem");
-            }
-
-            do {
-                System.out.println(part.toString());
-                part = part.getRight();
-                System.out.println("idę w prawo");
-            } while (part != null);
-*/
         }
     }
 
@@ -200,5 +190,5 @@ public class StructBuilder {
         }
 
     }
-
+*/
 }
