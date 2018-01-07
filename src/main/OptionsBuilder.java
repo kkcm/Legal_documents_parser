@@ -4,62 +4,67 @@ import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 
 public class OptionsBuilder {
-    private Option mode;
     private Option input;
+    private Option mode;
     private Option chapter;
-    private Option section;
     private Option article;
+    private Option articles;
     private Option paragraph;
     private Option point;
     private Option letter;
     private Option help;
 
+    //    private Option section;
 
     public OptionsBuilder() {
-
-        this.mode = new Option("m", "mode", true, "choose mode: c - display table of contents, b - display body");
-        mode.setRequired(true);
 
         this.input = new Option("i", "input", true, "input file to read data from");
         input.setRequired(true);
         input.setArgName("FILE PATH");
 
-        this.chapter = new Option("c", "chapter", true, "display chapter");
-        chapter.setArgs(2);
+        this.mode = new Option("m", "mode", true, "choose mode: c - display table of contents, b - display body");
+        mode.setRequired(true);
 
-        this.section = new Option("s", "section", true, "display section");
-        section.setArgs(2);
+        this.chapter = new Option("c", "chapter", true, "display chapter");
+        chapter.setArgs(1);
 
         this.article = new Option("a", "article", true, "display article");
-        article.setArgs(2);
+        article.setArgs(1);
+
+        this.articles = new Option("as", "articles", true, "display articles");
+        articles.setArgs(2);
 
         this.paragraph = new Option("p", "paragraph", true, "display paragraph");
-        paragraph.setArgs(2);
+        paragraph.setArgs(1);
 
         this.point = new Option("d", "point", true, "display point");
-        point.setArgs(2);
+        point.setArgs(1);
 
         this.letter = new Option("l", "letter", true, "display point");
-        letter.setArgs(2);
+        letter.setArgs(1);
 
         this.help = new Option("h", "help", false, "print this message");
+
+        //        this.section = new Option("s", "section", true, "display section");
+        //        section.setArgs(2);
 
     }
 
     public Options addOptions (Options options){
 
-        options.addOption(mode);
         options.addOption(input);
+        options.addOption(mode);
         options.addOption(chapter);
-        options.addOption(section);
         options.addOption(article);
+        options.addOption(articles);
         options.addOption(paragraph);
         options.addOption(point);
         options.addOption(letter);
         options.addOption(help);
 
-        return options;
+        //        options.addOption(section);
 
+        return options;
     }
 
 }

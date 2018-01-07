@@ -20,6 +20,8 @@ public class StructBuilder {
         textInfo.add("to pominiemy, bo data");
         textInfo.add("to pominiemy, bo pojedyncza litera/cyfra");
         textInfo.add("to będzie podtytuł");
+
+        last.saveLine("Twój plik:");
     }
 
     public void writeInfo (ArrayList<Boolean> matches, String in){

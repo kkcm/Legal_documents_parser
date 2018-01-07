@@ -22,6 +22,11 @@ public class Main {
         try {
 
             cmd = parser.parse(options, args);
+            int xyz = cmd.getArgs().length;
+            System.out.println(xyz);
+
+            
+
             String inputFilePath = cmd.getOptionValue("input");
 
             FileReader fileReader = new FileReader(inputFilePath);
@@ -29,13 +34,6 @@ public class Main {
 
             for (String arg : args )
                 System.out.println("Argument : " + arg);
-
-/*            String[] articleNumbers = cmd.getOptionValues("article");
-            System.out.println("Input File Path : " + inputFilePath);
-            for (String num : articleNumbers )
-            System.out.println("Article Number : " + num);
-            System.out.println("\n");
-*/
 
 
             StructBuilder textInfos = new StructBuilder();
@@ -52,7 +50,6 @@ public class Main {
                 textLine = bufferedReader.readLine();
             } while(textLine != null);
 
-         //   textInfos.printTableOfContents();
 
          TextPrinter textPrinter = new TextPrinter();
          textPrinter.printAll(textInfos);
@@ -67,18 +64,63 @@ public class Main {
          System.out.println("Następny rozdział X zaczyna się z artykułem " + num1);
 
          textPrinter.printChapter(textInfos, "Rozdział IX");
-
-
-         //   IPart partToPrint = textPrinter.findParagraph (textInfos, "2.", textInfos.articles.get(161).getDown());
-         //   System.out.println("wróciłem do print paragraph z tym -> " +partToPrint.toString());
-         //   textPrinter.writePart(partToPrint);
-
          textPrinter.printParagraph(textInfos, "2.", 162);
          textPrinter.printParagraph(textInfos, "1.", 214);
          textPrinter.printPoint(textInfos, "2)","2.", 162);
 
+     /*    String[] articleNumbers = cmd.getOptionValues("articles");
+         for (String num3 : articleNumbers )
+                System.out.println("Article Number : " + num3);
+         System.out.println("\n");
+         textPrinter.printArticles(textInfos, Integer.parseInt(articleNumbers[0]), Integer.parseInt(articleNumbers[1]));
+*/
+         String mode = cmd.getOptionValue("mode");
+        if (mode.equals("c")){
+            System.out.println("wybrałeś opcję wyświetlania spisu treści");
+            textPrinter.printTableOfContent(textInfos);
+        } else if (mode.equals("b")){
+            System.out.println("wybrałeś opcję wyświetlania body");
 
-            bufferedReader.close();
+            String chapter = cmd.getOptionValue("chapter");
+            String article = cmd.getOptionValue("article");
+            String[] articles = cmd.getOptionValues("articles");
+            String paragraph = cmd.getOptionValue("paragraph");
+            String point = cmd.getOptionValue("point");
+
+            if(chapter != null){
+                System.out.println("chcesz wyświetlić rozdział " + chapter);
+                textPrinter.printChapter(textInfos, "Rozdział "+chapter);
+            } else if (articles != null){
+                System.out.println("chcesz wyświetlić zakres artykułów");
+                textPrinter.printArticles(textInfos, Integer.parseInt(articles[0]), Integer.parseInt(articles[1]));
+            } else if (article != null){
+                System.out.println("chcesz wyświtlić artykuł i może coś więcej");
+
+                if(paragraph != null && point != null){
+                    System.out.println("chcesz wyświtlić artykuł , paragraf, punkt");
+                    textPrinter.printPoint(textInfos, point, paragraph, Integer.parseInt(article));
+                } else if ( paragraph != null){
+                    System.out.println("chcesz wyświtlić artykuł , paragraf");
+                    textPrinter.printParagraph(textInfos, paragraph, Integer.parseInt(article));
+                }else if ( point != null){
+                    System.out.println("chcesz wyświtlić artykuł , punkt");
+                } else {
+                    System.out.println("chcesz wyświtlić artykuł");
+                    textPrinter.printArticle(textInfos, Integer.parseInt(article));
+                }
+            }
+            else {
+                System.out.println("nie podałeś specyfikacji więc wyświetlę całą konstytucję");
+                textPrinter.printAll(textInfos);
+            }
+
+
+        } else {
+            System.out.println("podałeś zły argument dla opcji mode");
+        }
+
+
+         bufferedReader.close();
 
         } catch (ParseException ex){
 
