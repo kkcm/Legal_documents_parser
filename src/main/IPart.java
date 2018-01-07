@@ -14,6 +14,8 @@ public interface IPart {
 
     void addLine (String in);
 
+    String getBody();
+
     IPart getRight();
 
     IPart getLeft();

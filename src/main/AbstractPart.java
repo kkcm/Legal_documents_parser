@@ -46,6 +46,10 @@ public class AbstractPart implements IPart {
         return  this.left;
     }
 
+    public String getBody(){
+        return this.body;
+    }
+
     public void setRight(IPart part){
         this.right = part;
     }
