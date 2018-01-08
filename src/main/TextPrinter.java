@@ -25,21 +25,45 @@ public class TextPrinter {
 
     public void printAll(StructBuilder struct){
 
+       for (Article article : struct.articles){
+            IPart part = article;
+
+            do {
+                while (part.getUp() != null) {
+                    part = part.getUp();
+                    System.out.println("wchodzę w górę");
+                }
+                while (part.getDown() != null && !part.getClass().isAssignableFrom(Article.class) && !part.getClass().isAssignableFrom(ArticleWithLetter.class)){
+                    System.out.println(part.toString());
+                    part = part.getDown();
+                    System.out.println("schodzę w dół");
+                }
+
+
+                printDown(part);
+                part = part.getRight();
+                System.out.println("Spróbuję iść w prawo");
+            } while (part != null);
+
+
+        }
+    }
+
+    public void printAll1(StructBuilder struct){
+
         for (Article article : struct.articles){
             IPart part = article;
 
-            while (part.getUp() != null){
-                part = part.getUp();
-                System.out.println("wchodzę w górę");
-            }
-            while (part.getDown() != null && !part.getClass().isAssignableFrom(article.getClass()) ) {
-                System.out.println(part.toString());
-                part = part.getDown();
-                System.out.println("schodzę w dół");
-            }
-
+                while (part.getUp() != null) {
+                    part = part.getUp();
+                    System.out.println("wchodzę w górę");
+                }
+                while (part.getDown() != null && !part.getClass().isAssignableFrom(article.getClass())) {
+                    System.out.println(part.toString());
+                    part = part.getDown();
+                    System.out.println("schodzę w dół");
+                }
             writePart(part);
-
         }
     }
 

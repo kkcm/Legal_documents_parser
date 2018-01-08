@@ -11,6 +11,7 @@ public class ObjectHierarchy {
         objects.add(new Chapter());
         objects.add(new Subtitle());
         objects.add(new Article());
+        objects.add(new ArticleWithLetter());
         objects.add(new Paragraph());
         objects.add(new Point());
         objects.add(new Letter());

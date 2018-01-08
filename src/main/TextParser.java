@@ -14,8 +14,11 @@ public class TextParser {
         String titlePatternString = "KONSTYTUCJA|RZECZYPOSPOLITEJ POLSKIEJ|Dz.U. 2007 Nr 50 poz. 331|USTAWA";
         patternStrings.add(titlePatternString);
 
-        String articlePatternString = "Art..*";
+        String articlePatternString = "Art\\. [0-9]++\\..*";
         patternStrings.add(articlePatternString);
+
+        String articleWithLetterPatternString =  "Art. [0-9]++[a-z]++. .*";
+        patternStrings.add(articleWithLetterPatternString);
 
         String sectionPatternString = "DZIAŁ.*";
         patternStrings.add(sectionPatternString);

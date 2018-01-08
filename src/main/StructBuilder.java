@@ -8,10 +8,12 @@ public class StructBuilder {
     private IPart last = new Section();
     private IPart lastParagraph = new Paragraph();
     private IPart lastPoint = new Point();
+    private IPart lastArticleWithLetter = new ArticleWithLetter();
 
     public StructBuilder() {
         textInfo.add("to będzie tytuł");
         textInfo.add("to będzie artykuł");
+        textInfo.add("to będzie artykuł z literką");
         textInfo.add("to będzie dział");
         textInfo.add("to będzie rozdział");
         textInfo.add("to będzie ustęp");
@@ -119,6 +121,53 @@ public class StructBuilder {
                     articles.add(newArticle);
                     newArticle.saveLine(in);
                     System.out.println(newArticle.toString());
+                }
+
+                if(textInfo.get(i).equals("to będzie artykuł z literką")) {
+                    System.out.println("wszedłem w artykuł z literką");
+                    ArticleWithLetter newArticleWithLetter = new ArticleWithLetter();
+
+                    ObjectHierarchy hierarchy = new ObjectHierarchy();
+                    if (!hierarchy.isHigher(this.last, newArticleWithLetter)) {
+                        if (this.last.getClass().isAssignableFrom(newArticleWithLetter.getClass()) || this.last.getClass().isAssignableFrom(Article.class)) {
+                            System.out.println("poprzednia klasa też byla artykulem z literką albo samym artykułem");
+                            newArticleWithLetter.setLeft(this.last);
+                            this.last.setRight(newArticleWithLetter);
+                        } else {
+                            System.out.println("poprzednia klasa NIE byla artykulem z literką ani artykułem więc łączę góra dół");
+                            newArticleWithLetter.setUp(this.last);
+                            this.last.setDown(newArticleWithLetter);
+
+                            System.out.println("poprzednia klasa NIE byla artykulem z literką więc również z wcześniejszym artykułem bądź artykułem z literką");
+                            if(articles.get(articles.size()-1).getRight() == null){
+                                System.out.println("nie było pierwszego artykułu z literką pod ostatnim arytułem");
+                                articles.get(articles.size()-1).setRight(newArticleWithLetter);
+                                newArticleWithLetter.setLeft(articles.get(articles.size()-1));
+                            } else {
+                                System.out.println("BYŁ już jakiś artykuł z literką pod ostatnim arytułem");
+                                newArticleWithLetter.setLeft(this.lastArticleWithLetter);
+                                this.lastArticleWithLetter.setRight(newArticleWithLetter);
+                            }
+
+                        }
+                    } else {
+                        System.out.println("poprzednia klasa była niższa więc łączę z poprzednim artykułem z literką");
+
+                        if(articles.get(articles.size()-1).getRight() == null){
+                            System.out.println("nie było pierwszego artykułu z literką pod ostatnim arytułem");
+                            articles.get(articles.size()-1).setRight(newArticleWithLetter);
+                            newArticleWithLetter.setLeft(articles.get(articles.size()-1));
+                        } else {
+                            System.out.println("BYŁ już jakiś artykuł z literką pod ostatnim arytułem");
+                            newArticleWithLetter.setLeft(this.lastArticleWithLetter);
+                            this.lastArticleWithLetter.setRight(newArticleWithLetter);
+                        }
+                    }
+
+                    this.last = newArticleWithLetter;
+                    this.lastArticleWithLetter = newArticleWithLetter;
+                    newArticleWithLetter.saveLine(in);
+                    System.out.println(newArticleWithLetter.toString());
                 }
 
 
