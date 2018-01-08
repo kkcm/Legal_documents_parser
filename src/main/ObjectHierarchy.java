@@ -7,11 +7,13 @@ public class ObjectHierarchy {
 
     public ObjectHierarchy(){
         objects.add(new Title());
+        objects.add(new Section());
         objects.add(new Chapter());
         objects.add(new Subtitle());
         objects.add(new Article());
         objects.add(new Paragraph());
         objects.add(new Point());
+        objects.add(new Letter());
 
     }
 

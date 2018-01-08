@@ -11,7 +11,7 @@ public class TextParser {
     private ArrayList<Boolean> matches = new ArrayList<>();
 
     public TextParser() {
-        String titlePatternString = "KONSTYTUCJA|RZECZYPOSPOLITEJ POLSKIEJ";
+        String titlePatternString = "KONSTYTUCJA|RZECZYPOSPOLITEJ POLSKIEJ|Dz.U. 2007 Nr 50 poz. 331|USTAWA";
         patternStrings.add(titlePatternString);
 
         String articlePatternString = "Art..*";
@@ -24,14 +24,14 @@ public class TextParser {
         patternStrings.add(chapterPatternString);
 
 
-        String paragraphPatternString = "[0-9]++\\..*";
+        String paragraphPatternString = "[0-9]++\\..*|Art\\. [0-9]++\\. [0-9]++\\..*|[0-9]++[a-z]\\..*|Art\\. [0-9]++[a-z]++\\. [0-9]++\\..*" ;  // Art. 99a. 1.
         patternStrings.add(paragraphPatternString);
 
-        String pointPatternString = "[0-9]++\\).*";
+        String pointPatternString = "[0-9]++\\) .*|[0-9]++[a-z]++\\) .*";
         patternStrings.add(pointPatternString);
 
 
-        String letterPatternString = "[a-z]\\).*";
+        String letterPatternString = "[a-z]\\) .*";
         patternStrings.add(letterPatternString);
 
         String constitutionPatternString = "\\u00a9.*";
@@ -47,6 +47,7 @@ public class TextParser {
 
         String subtitlePatternString = "[A-ZŻŹĆĄŚĘŁÓŃ | \\, | \\t]++";
         patternStrings.add(subtitlePatternString);
+
 
     }
 

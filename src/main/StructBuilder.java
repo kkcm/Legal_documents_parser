@@ -7,6 +7,7 @@ public class StructBuilder {
     ArrayList<Article> articles = new ArrayList<>();
     private IPart last = new Section();
     private IPart lastParagraph = new Paragraph();
+    private IPart lastPoint = new Point();
 
     public StructBuilder() {
         textInfo.add("to będzie tytuł");
@@ -49,6 +50,22 @@ public class StructBuilder {
                     this.last = newTitle;
                     newTitle.saveLine(in);
                     System.out.println(newTitle.toString());
+                    break;
+                }
+
+                if(textInfo.get(i).equals("to będzie dział")){
+                    System.out.println("wszedłem w dział");
+                    Section newSection = new Section();
+
+                    ObjectHierarchy hierarchy = new ObjectHierarchy();
+                    if(!hierarchy.isHigher(this.last, newSection)){
+                        newSection.setUp(this.last);
+                        this.last.setDown(newSection);
+                    }
+
+                    this.last = newSection;
+                    newSection.saveLine(in);
+                    System.out.println(newSection.toString());
                     break;
                 }
 
@@ -147,11 +164,39 @@ public class StructBuilder {
                             this.last.setDown(newPoint);
                             System.out.println("poprzednia klasa NIE była punktem");
                         }
+                    } else {
+                        System.out.println("poprzednia klasa była niższa więc łączę z poprzednim punktem");
+                        newPoint.setLeft(this.lastPoint);
+                        this.lastPoint.setRight(newPoint);
                     }
 
+                    this.lastPoint = newPoint;
                     this.last = newPoint;
                     newPoint.saveLine(in);
                     System.out.println(newPoint.toString());
+                }
+
+                if(textInfo.get(i).equals("to będzie litera")){
+                    System.out.println(("wszedłem w literę"));
+                    Letter newLetter = new Letter();
+
+                    ObjectHierarchy hierarchy = new ObjectHierarchy();
+                    if(!hierarchy.isHigher(this.last, newLetter)){
+                        if(this.last.getClass().isAssignableFrom(newLetter.getClass())){
+                            System.out.println("poprzednia klasa też była literą");
+                            newLetter.setLeft(this.last);
+                            this.last.setRight(newLetter);
+                        } else {
+                            newLetter.setUp(this.last);
+                            this.last.setDown(newLetter);
+                            System.out.println("poprzednia klasa NIE była punktem");
+                        }
+                    }
+
+                    this.last = newLetter;
+                    newLetter.saveLine(in);
+                    System.out.println(newLetter.toString());
+                    break;
                 }
 
 
