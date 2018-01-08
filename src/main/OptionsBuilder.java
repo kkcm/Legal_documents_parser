@@ -4,6 +4,7 @@ import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 
 public class OptionsBuilder {
+    private Option section;
     private Option input;
     private Option mode;
     private Option chapter;
@@ -14,9 +15,11 @@ public class OptionsBuilder {
     private Option letter;
     private Option help;
 
-    //    private Option section;
 
     public OptionsBuilder() {
+
+        this.section = new Option("s", "section", true, "display section");
+        section.setArgs(1);
 
         this.input = new Option("i", "input", true, "input file to read data from");
         input.setRequired(true);
@@ -45,13 +48,12 @@ public class OptionsBuilder {
 
         this.help = new Option("h", "help", false, "print this message");
 
-        //        this.section = new Option("s", "section", true, "display section");
-        //        section.setArgs(2);
 
     }
 
     public Options addOptions (Options options){
 
+        options.addOption(section);
         options.addOption(input);
         options.addOption(mode);
         options.addOption(chapter);
@@ -61,8 +63,6 @@ public class OptionsBuilder {
         options.addOption(point);
         options.addOption(letter);
         options.addOption(help);
-
-        //        options.addOption(section);
 
         return options;
     }

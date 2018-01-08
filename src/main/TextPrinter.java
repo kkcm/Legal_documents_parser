@@ -1,5 +1,7 @@
 package main;
 
+import java.util.ArrayList;
+
 public class TextPrinter {
     public TextPrinter(){
 
@@ -87,6 +89,13 @@ public class TextPrinter {
         System.out.println("wróciłem do print point z tym -> " +partToPrint.toString());
         printDown(partToPrint);
 
+    }
+
+    public void printPart (Integer depth, ArrayList<IPart> parts, ArrayList<String> names, IPart partIn){
+        for (int i=0; i<depth; i++){
+            partIn = findNextPart(parts.get(i), names.get(i), partIn.getDown());
+        }
+        printDown(partIn);
     }
 
     public void writePart(IPart part){
@@ -196,4 +205,29 @@ public class TextPrinter {
         return partToReturn;
     }
 
+    public IPart findNextPart(IPart simplePart, String partName, IPart partIn){
+        System.out.println("to jest tekst zawarty w wejściowym part " +partIn.toString());
+        IPart partToReturn = partIn;
+        IPart partS = partIn;
+
+        if(partS.getClass().isAssignableFrom(simplePart.getClass())){
+            String str = partS.getBody();
+            System.out.println("znalazłem obiekt o body " + str);
+
+            if(str.contains(partName)){
+                System.out.print("teraz zwrócę obiekt o body" + partS.toString());
+                partToReturn = partS;
+            } else if (partS.getRight() != null){
+                System.out.println("pójdę w prawo do findeNxtPart");
+                partToReturn = findNextPart(simplePart, partName, partS.getRight());
+            } else {
+                System.out.println("zwrócę null w zagnieżdżonym ifie");
+                return null;
+            }
+        } else {
+            System.out.println("tutaj nie znajdziesz szukanego elementu");
+            return null;
+        }
+        return partToReturn;
+    }
 }

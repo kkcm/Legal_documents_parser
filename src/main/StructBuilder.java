@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class StructBuilder {
     private ArrayList<String> textInfo = new ArrayList<>();
     ArrayList<Article> articles = new ArrayList<>();
-    private IPart last = new Chapter();
+    private IPart last = new Section();
     private IPart lastParagraph = new Paragraph();
 
     public StructBuilder() {

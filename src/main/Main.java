@@ -6,6 +6,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) throws FileNotFoundException {
@@ -22,8 +23,8 @@ public class Main {
         try {
 
             cmd = parser.parse(options, args);
-            int xyz = cmd.getArgs().length;
-            System.out.println(xyz);
+            //         int xyz = cmd.getArgs().length;
+            //         System.out.println(xyz);
 
             
 
@@ -52,7 +53,7 @@ public class Main {
 
 
          TextPrinter textPrinter = new TextPrinter();
-         textPrinter.printAll(textInfos);
+/*         textPrinter.printAll(textInfos);
          textPrinter.printTableOfContent(textInfos);
          textPrinter.printArticle(textInfos, 186);
          textPrinter.printArticles(textInfos, 15, 29);
@@ -68,7 +69,7 @@ public class Main {
          textPrinter.printParagraph(textInfos, "1.", 214);
          textPrinter.printPoint(textInfos, "2)","2.", 162);
 
-     /*    String[] articleNumbers = cmd.getOptionValues("articles");
+         String[] articleNumbers = cmd.getOptionValues("articles");
          for (String num3 : articleNumbers )
                 System.out.println("Article Number : " + num3);
          System.out.println("\n");
@@ -104,6 +105,17 @@ public class Main {
                     textPrinter.printParagraph(textInfos, paragraph, Integer.parseInt(article));
                 }else if ( point != null){
                     System.out.println("chcesz wyświtlić artykuł , punkt");
+
+                    ArrayList<IPart> parts = new ArrayList<>();
+                    parts.add(new Point());
+
+                    ArrayList<String> names = new ArrayList<>();
+                    names.add(point);
+
+                    System.out.println("zrobiłem listy");
+
+                    textPrinter.printPart(parts.size(), parts, names, textInfos.articles.get(Integer.parseInt(article)-1));
+
                 } else {
                     System.out.println("chcesz wyświtlić artykuł");
                     textPrinter.printArticle(textInfos, Integer.parseInt(article));
@@ -114,6 +126,18 @@ public class Main {
                 textPrinter.printAll(textInfos);
             }
 
+    /*        textPrinter.printDown(textPrinter.findNextPart(new Point(), "1)", textInfos.articles.get(241).getDown()));
+
+            ArrayList<IPart> parts = new ArrayList<>();
+            parts.add(new Paragraph());
+            parts.add(new Point());
+
+            ArrayList<String> names = new ArrayList<>();
+            names.add("1.");
+            names.add("3");
+
+            textPrinter.printPart(2, parts, names, textInfos.articles.get(88));
+*/
 
         } else {
             System.out.println("podałeś zły argument dla opcji mode");
