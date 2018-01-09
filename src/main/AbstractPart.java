@@ -1,13 +1,16 @@
 package main;
 
 public class AbstractPart implements IPart {
-    protected IPart up;
     protected String description;
     protected String body;
+    protected IPart up;
     protected IPart down;
     protected IPart right;
     protected IPart left;
-//    private Body body;
+
+    public void saveDescription(String in){
+        this.description = in;
+    }
 
     public void saveLine (String in){
         this.body = in;
@@ -26,8 +29,20 @@ public class AbstractPart implements IPart {
         this.down = part;
     }
 
-    public String toString() {
-        return "tymczasowe body: "+ this.body;
+    public void setRight(IPart part){
+        this.right = part;
+    }
+
+    public void setLeft(IPart part){
+        this.left = part;
+    }
+
+    public String getDescription(){
+        return this.description;
+    }
+
+    public String getBody(){
+        return this.body;
     }
 
     public IPart getUp (){
@@ -46,16 +61,15 @@ public class AbstractPart implements IPart {
         return  this.left;
     }
 
-    public String getBody(){
-        return this.body;
+    public String toString() {
+        if(this.body != null && this.description != null){
+            return "d "+this.description+"  b "+this.body;
+        }else if (this.description != null){
+            return "d "+this.description;
+        }else if (this.body != null){
+            return "  b "+this.body;
+        } else {
+            return null;  // dorobić błąd
+        }
     }
-
-    public void setRight(IPart part){
-        this.right = part;
-    }
-
-    public void setLeft(IPart part){
-        this.left = part;
-    }
-
 }

@@ -2,7 +2,11 @@ package main;
 
 public interface IPart {
 
+    void saveDescription(String in);
+
     void saveLine (String in);
+
+    void addLine (String in);
 
     void setUp(IPart part);
 
@@ -12,18 +16,18 @@ public interface IPart {
 
     void setLeft(IPart part);
 
-    void addLine (String in);
+    String getDescription();
 
     String getBody();
+
+    IPart getUp ();
+
+    IPart getDown();
 
     IPart getRight();
 
     IPart getLeft();
 
     String toString();
-
-    IPart getUp ();
-
-    IPart getDown();
 
 }

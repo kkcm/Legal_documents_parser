@@ -3,23 +3,29 @@ package main;
 import java.util.ArrayList;
 
 public class TextPrinter {
-    public TextPrinter(){
+    private ObjectHierarchy hierarchy;
 
+    public TextPrinter(){
+        this.hierarchy = new ObjectHierarchy();
     }
 
     public void printTableOfContent(StructBuilder struct){
         for (Article article : struct.articles) {
             IPart part = article;
 
-            while (part.getUp() != null) {
-                part = part.getUp();
-                System.out.println("wchodzę w górę");
-            }
-            while (part.getDown() != null && !part.getClass().isAssignableFrom(article.getClass())) {
-                System.out.println(part.toString());
-                part = part.getDown();
-                System.out.println("schodzę w dół");
-            }
+            do {
+                while (part.getUp() != null) {
+                    part = part.getUp();
+                    System.out.println("wchodzę w górę");
+                }
+                while (part.getDown() != null && !part.getClass().isAssignableFrom(article.getClass()) && !part.getClass().isAssignableFrom(ArticleWithLetter.class) ) {
+                    System.out.println(part.toString());
+                    part = part.getDown();
+                    System.out.println("schodzę w dół");
+                }
+                part = part.getRight();
+            } while (part != null);
+
         }
     }
 
@@ -68,6 +74,9 @@ public class TextPrinter {
     }
 
     public void printArticle (StructBuilder struct, Integer num){
+        if(num > struct.articles.size()-1){
+            throw new TestException("za duży indeks");
+        }
         writePart(struct.articles.get(num-1));
     }
 
@@ -96,7 +105,28 @@ public class TextPrinter {
             }
 
             writePart(part);
+        }
+    }
 
+    public void printSection (StructBuilder struct, String chapterName){
+        Integer art1 = findSection(struct, chapterName);
+        Integer art2 = findNextSection(struct, art1);
+
+        Integer i;
+        for (i = art1-1; i<art2-1; i++){
+            IPart part = struct.articles.get(i);
+
+            while (part.getUp() != null){
+                part = part.getUp();
+                System.out.println("wchodzę w górę");
+            }
+            while (part.getDown() != null && !part.getClass().isAssignableFrom(struct.articles.get(i).getClass()) ) {
+                System.out.println(part.toString());
+                part = part.getDown();
+                System.out.println("schodzę w dół");
+            }
+
+            writePart(part);
         }
     }
 
@@ -116,8 +146,12 @@ public class TextPrinter {
     }
 
     public void printPart (Integer depth, ArrayList<IPart> parts, ArrayList<String> names, IPart partIn){
-        for (int i=0; i<depth; i++){
+       Integer i;
+        for ( i=0; i<depth; i++){
+            System.out.println("wchodzę do pętli z i " + i);
             partIn = findNextPart(parts.get(i), names.get(i), partIn.getDown());
+            System.out.println("wróciłem do printPart z "+partIn.toString() + i);
+
         }
         printDown(partIn);
     }
@@ -137,6 +171,45 @@ public class TextPrinter {
         if (part.getDown() != null){
             writePart(part.getDown());
         }
+    }
+
+    public Integer findSection (StructBuilder struct, String sectionName){
+        Integer i;
+        for (i=0; i<struct.articles.size(); i++){
+            IPart part = struct.articles.get(i);
+            System.out.println("jestem w artykule " + (i+1));
+            while (part.getUp() != null){
+                part = part.getUp();
+                if (part.getClass().isAssignableFrom(Section.class)){
+                    String str = part.getBody();
+                    System.out.println("znalazłem obiekt o klasie rozdział");
+                    if (str.contains(sectionName)){
+                        return i+1;
+                    }else{
+                        break;
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    public Integer findNextSection (StructBuilder struct, int num){
+        Integer i;
+        for (i=num; i<struct.articles.size(); i++){
+            IPart part = struct.articles.get(i);
+            System.out.println("jestem w artykule " + (i+1));
+            while (part.getUp() != null){
+                part = part.getUp();
+                System.out.println("będę sprawdzał klasę");
+                if (part.getClass().isAssignableFrom(Section.class)){
+                    System.out.println("znalazłem obiekt o klasie rozdział");
+                    return i+1;
+                }
+                System.out.println("wchodzę w górę");
+            }
+        }
+        return null;
     }
 
     public Integer findChapter (StructBuilder struct, String chapterName){
