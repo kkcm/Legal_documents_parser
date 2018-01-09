@@ -10,7 +10,7 @@ public class Chapter extends AbstractPart implements IPart{
         this.down = null;
     }
 
- /*   public String toString() {
+    public String toString() {
         if(this.body != null && this.description != null){
             return this.description+'\n'+this.body;
         }else if (this.description != null){
@@ -21,5 +21,5 @@ public class Chapter extends AbstractPart implements IPart{
             return null;
         }
     }
-*/
+
 }

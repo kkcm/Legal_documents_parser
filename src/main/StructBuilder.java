@@ -1,5 +1,9 @@
 package main;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class StructBuilder {
@@ -28,7 +32,34 @@ public class StructBuilder {
         last.saveLine("Twój plik:");
     }
 
-    public void writeInfo (ArrayList<Boolean> matches, String in){
+    public StructBuilder readFile(String inputFilePath){
+
+        try{
+            FileReader fileReader = new FileReader(inputFilePath);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            String textLine = bufferedReader.readLine();
+            do {
+                TextParser textParser = new TextParser();
+                textParser.createPattern();
+                textParser.checkInLine(textLine);
+                textParser.isInLine();
+                this.parseText(textParser.getMatches(), textLine);
+                //    System.out.println(textLine);
+                textLine = bufferedReader.readLine();
+            } while(textLine != null);
+            bufferedReader.close();
+        } catch (FileNotFoundException e) {
+            System.err.println("File does not exist");
+            System.exit(0);
+        } catch (IOException e) {
+            System.err.println("File exists, but there was IOException");
+        }
+
+        return this;
+    }
+
+
+    public void parseText (ArrayList<Boolean> matches, String in){
 
         boolean test = false;
         boolean test2 = false;

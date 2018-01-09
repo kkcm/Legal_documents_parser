@@ -19,9 +19,6 @@ public class OptionsBuilder {
     private Option help;
 
 
-    // zakres article with letter
-
-
     public OptionsBuilder() {
 
         this.section = new Option("s", "section", true, "display section");

@@ -13,7 +13,7 @@ public class TextEditor {
             in1 = in1.substring(0, in1.length() - 1);
             builder.append(in1).append(in2);
         }else{
-            builder.append(in1).append(' ').append(in2);
+            builder.append(in1).append('\n').append(in2);
         }
         return this.builder.toString();
     }

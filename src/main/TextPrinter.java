@@ -14,7 +14,7 @@ public class TextPrinter {
     public void printTableOfContent(StructBuilder struct) {
         for (Article article : struct.articles) {
             IPart part = article;
-            this.printContentHelper(struct, article);
+            this.printContentHelper(part);
         }
     }
 
@@ -25,20 +25,18 @@ public class TextPrinter {
         Integer i;
         for (i = art1; i < art2; i++) {
             IPart part = struct.articles.get(i);
-            this.printContentHelper(struct, part);
+            this.printContentHelper(part);
         }
     }
 
-    public void printContentHelper(StructBuilder struct, IPart part) {
+    public void printContentHelper(IPart part) {
         do {
             while (part.getUp() != null) {
                 part = part.getUp();
-                //        System.out.println("wchodzę w górę");
             }
             while (part.getDown() != null && !hierarchy.isEqual(part, new Article()) && !hierarchy.isEqual(part, new ArticleWithLetter())) {
                 System.out.println(part.toString());
                 part = part.getDown();
-                //        System.out.println("schodzę w dół");
             }
             part = part.getRight();
         } while (part != null);
@@ -48,34 +46,34 @@ public class TextPrinter {
 
         for (Article article : struct.articles) {
             IPart part = article;
-
-            do {
-                while (part.getUp() != null) {
-                    part = part.getUp();
-     //               System.out.println("wchodzę w górę");
-                }
-                while (part.getDown() != null && !hierarchy.isEqual(part, new Article()) && !hierarchy.isEqual(part, new ArticleWithLetter())) {
-                    System.out.println(part.toString());
-                    part = part.getDown();
-    //                System.out.println("schodzę w dół");
-                }
-                printDown(part);
-                part = part.getRight();
-    //            System.out.println("Spróbuję iść w prawo");
-            } while (part != null);
+            this.printAllHelper(part);
         }
+    }
+
+    public void printAllHelper (IPart part){
+        do {
+            while (part.getUp() != null) {
+                part = part.getUp();
+            }
+            while (part.getDown() != null && !hierarchy.isEqual(part, new Article()) && !hierarchy.isEqual(part, new ArticleWithLetter())) {
+                System.out.println(part.toString());
+                part = part.getDown();
+            }
+            printDown(part);
+            part = part.getRight();
+        } while (part != null);
     }
 
     public void printArticle(StructBuilder struct, Integer num) {
         if (num > struct.articles.size() - 1) {
             throw new TestException("za duży indeks");
         }
-        writePart(struct.articles.get(num - 1));  //będzie trzeba chyba zmienić na printDown
+        printDown(struct.articles.get(num - 1));
     }
 
     public void printArticles(StructBuilder struct, Integer num1, Integer num2) {
         for (int i = num1; i < num2 + 1; i++) {
-            printArticle(struct, i);
+            writePart(struct.articles.get(i - 1));
         }
     }
 
@@ -92,19 +90,10 @@ public class TextPrinter {
         Integer i;
         for (i = art1; i < art2; i++) {
             IPart part = struct.articles.get(i);
-
-            while (part.getUp() != null) {
-                part = part.getUp();
-        //        System.out.println("wchodzę w górę");
-            }
-            while (part.getDown() != null && !hierarchy.isEqual(part, new Article()) && !hierarchy.isEqual(part, new ArticleWithLetter())) {
-                System.out.println(part.toString());
-                part = part.getDown();
-                //       System.out.println("schodzę w dół");
-            }
-            writePart(part);
+            this.printAllHelper(part);
         }
     }
+
 
     public void printDown(IPart part) {
         System.out.println(part.toString());
@@ -126,10 +115,7 @@ public class TextPrinter {
     public void printPart(ArrayList<IPart> parts, ArrayList<String> names, IPart partIn) {
         Integer i;
         for (i = 0; i < parts.size(); i++) {
-//            System.out.println("wchodzę do pętli z i " + i);
             partIn = finder.findNextPart(parts.get(i), names.get(i), partIn.getDown());
-//            System.out.println("wróciłem do printPart z " + partIn.toString() + i);
-
         }
         printDown(partIn);
     }
