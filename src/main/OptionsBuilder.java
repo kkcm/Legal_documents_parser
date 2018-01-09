@@ -21,44 +21,44 @@ public class OptionsBuilder {
 
     public OptionsBuilder() {
 
-        this.section = new Option("s", "section", true, "display section");
+        this.section = new Option("s", "section", true, "wyświetla dział - np. -s VII");
         section.setArgs(1);
 
-        this.input = new Option("i", "input", true, "input file to read data from");
+        this.input = new Option("i", "input", true, "ścieżka dostępu do pliku");
         input.setRequired(true);
         input.setArgName("FILE PATH");
 
-        this.mode = new Option("m", "mode", true, "choose mode: c - display table of contents, b - display body");
+        this.mode = new Option("m", "mode", true, "wybierz tryb działania: c - wyświetla spis treści, b - wyświetla spis");
         mode.setRequired(true);
 
-        this.chapter = new Option("c", "chapter", true, "display chapter");
+        this.chapter = new Option("c", "chapter", true, "wyświetla rozdział - np. -c III");
         chapter.setArgs(1);
 
-        this.tableOfChapter = new Option ("tc", "table of chapters", true, "wyświetl spis treści danego rozdziału");
+        this.tableOfChapter = new Option ("tc", "table of chapters", true, "wyświetl spis treści danego rozdziału, wymagany tryb wyświetlania spisu treści - np. -tc II");
         tableOfChapter.setArgs(1);
 
-        this.tableOfSection = new Option ("ts", "table of sections", true, "wyświetl spis treści danego działu");
+        this.tableOfSection = new Option ("ts", "table of sections", true, "wyświetl spis treści danego działu, wymagany tryb wyświetlania spisu treści - np. -ts V");
         tableOfSection.setArgs(1);
 
-        this.article = new Option("a", "article", true, "display article");
+        this.article = new Option("a", "article", true, "wyświetla artykuł - np. -a 242");
         article.setArgs(1);
 
-        this.articles = new Option("as", "articles", true, "display articles");
+        this.articles = new Option("as", "articles", true, "wyświetla ciąg artykułów - np. -as 34 43");
         articles.setArgs(2);
 
-        this.articleWithLetter = new Option("al", "articleWithLetter", true, "pokaż artykuł z literką - podaj cyfrę, a po odstępie literę");
+        this.articleWithLetter = new Option("al", "articleWithLetter", true, "pokaż artykuł z literą - podaj cyfrę, a po odstępie literę");
         articleWithLetter.setArgs(2);
 
-        this.paragraph = new Option("p", "paragraph", true, "display paragraph");
+        this.paragraph = new Option("p", "paragraph", true, "wyświetla ustęp - np. -p 3.");
         paragraph.setArgs(1);
 
-        this.point = new Option("d", "point", true, "display point");
+        this.point = new Option("d", "point", true, "wyświetla punkt - np. -d 3)");
         point.setArgs(1);
 
-        this.letter = new Option("l", "letter", true, "display point");
+        this.letter = new Option("l", "letter", true, "wyświetla literę - np. -l b)");
         letter.setArgs(1);
 
-        this.help = new Option("h", "help", false, "print this message");
+        this.help = new Option("h", "help", false, "wyświetla tą isttrukcję");
 
     }
 

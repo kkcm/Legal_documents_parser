@@ -68,12 +68,12 @@ public class TextPrinter {
         if (num > struct.articles.size() - 1) {
             throw new TestException("za duży indeks");
         }
-        printDown(struct.articles.get(num - 1));
+        writePart(struct.articles.get(num - 1));
     }
 
     public void printArticles(StructBuilder struct, Integer num1, Integer num2) {
         for (int i = num1; i < num2 + 1; i++) {
-            writePart(struct.articles.get(i - 1));
+            printArticle(struct, i);
         }
     }
 
@@ -103,6 +103,7 @@ public class TextPrinter {
     }
 
     public void writePart(IPart part) {
+
         System.out.println(part.toString());
         if (part.getDown() != null) {
             writePart(part.getDown());

@@ -10,8 +10,19 @@ public class TextEditor {
     public String addText(String in1, String in2){
         this.builder = new StringBuilder();
         if (in1 != null && in1.length() > 0 && in1.charAt(in1.length() - 1) == '-') {
+
+            String[] in2parts = this.cutLine(in2, " ");
+
             in1 = in1.substring(0, in1.length() - 1);
-            builder.append(in1).append(in2);
+            builder.append(in1).append(in2parts[0]);
+
+            String in11 = this.builder.toString();
+
+            String in2again = this.concatTableElement(in2parts, " ", 1, in2parts.length -1);
+            this.builder = new StringBuilder();
+
+            builder.append(in11).append('\n').append(in2again);
+
         }else{
             builder.append(in1).append('\n').append(in2);
         }

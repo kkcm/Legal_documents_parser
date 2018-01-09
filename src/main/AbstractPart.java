@@ -63,13 +63,12 @@ public class AbstractPart implements IPart {
 
     public String toString() {
         if(this.body != null && this.description != null){
-            return this.description + this.body;
+            return this.description +" "+ this.body;
         }else if (this.description != null){
             return this.description;
         }else if (this.body != null){
             return this.body;
-        } else {
-            return null;
         }
+        return null;
     }
 }

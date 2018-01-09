@@ -7,9 +7,6 @@ import java.io.FileNotFoundException;
 public class Main {
     public static void main(String[] args) throws FileNotFoundException {
 
-        for (String arg : args )
-            System.out.println("Argument : " + arg);
-
         Options options = new Options();
         OptionsBuilder opt = new OptionsBuilder();
         opt.addOptions(options);
@@ -17,8 +14,6 @@ public class Main {
         HelpFormatter formatter = new HelpFormatter();
         CommandLineParser parser = new DefaultParser();
         CommandLine cmd;
-
-
 
          try {
            cmd = parser.parse(options, args);
@@ -31,6 +26,8 @@ public class Main {
 
         } catch (TestException ex){
             System.out.println("TestException: " + ex.getMessage());
-        }
+        } catch (IndexOutOfBoundsException ex){
+            System.out.println("IndexOutOfBoundsException: "+ ex.getMessage());
+         }
     }
 }
