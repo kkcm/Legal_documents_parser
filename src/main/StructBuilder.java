@@ -42,7 +42,7 @@ public class StructBuilder {
 
             if (matches.get(i)){
 
-                System.out.println(textInfo.get(i));
+                System.out.println(textInfo.get(i)); // do wyłączenia
                 test = true;
 
                 if(textInfo.get(i).equals("litera/cyfra") || textInfo.get(i).equals("data") || textInfo.get(i).equals("kancelaria") ){
@@ -74,7 +74,7 @@ public class StructBuilder {
                  //   System.out.println("wszedłem w dział");
                     String description = textEditor.concatTableElement(parts, " ", counter++, counter++);
                     this.createNewSection(description);
-                //    break;
+                    break;
                 }
 
                 if (textInfo.get(i).equals("rozdział")){

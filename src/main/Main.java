@@ -62,7 +62,7 @@ public class Main {
 
             if(chapter != null){
                 System.out.println("chcesz wyświetlić rozdział " + chapter);
-                textPrinter.printChapter(structBuilder, "Rozdział "+chapter);
+            //    textPrinter.printChapter(structBuilder, "Rozdział "+chapter);
             } else if (articles != null){
                 System.out.println("chcesz wyświetlić zakres artykułów");
                 textPrinter.printArticles(structBuilder, Integer.parseInt(articles[0]), Integer.parseInt(articles[1]));
@@ -71,10 +71,10 @@ public class Main {
 
                 if(paragraph != null && point != null){
                     System.out.println("chcesz wyświtlić artykuł , paragraf, punkt");
-                    textPrinter.printPoint(structBuilder, point, paragraph, Integer.parseInt(article));
+//                    textPrinter.printPoint(structBuilder, point, paragraph, Integer.parseInt(article));
                 } else if ( paragraph != null){
                     System.out.println("chcesz wyświtlić artykuł , paragraf");
-                    textPrinter.printParagraph(structBuilder, paragraph, Integer.parseInt(article));
+//                    textPrinter.printParagraph(structBuilder, paragraph, Integer.parseInt(article));
                 }else if ( point != null){
                     System.out.println("chcesz wyświtlić artykuł , punkt");
 
@@ -86,7 +86,7 @@ public class Main {
 
                     System.out.println("zrobiłem listy");
 
-                    textPrinter.printPart(parts.size(), parts, names, structBuilder.articles.get(Integer.parseInt(article)-1));
+                    textPrinter.printPart(parts, names, structBuilder.articles.get(Integer.parseInt(article)-1));
 
                 } else {
                     System.out.println("chcesz wyświtlić artykuł");
@@ -103,32 +103,28 @@ public class Main {
             System.out.println("podałeś zły argument dla opcji mode");
         }
 
-       /*     ArrayList<IPart> parts = new ArrayList<>();
-            parts.add(new Paragraph());
-
-
+            ArrayList<IPart> parts = new ArrayList<>();
             ArrayList<String> names = new ArrayList<>();
-            names.add("2.");
 
+            textPrinter.printArticle(structBuilder, 81);
 
-            System.out.println("jestem");
-            textPrinter.printArticle(structBuilder, 2);
-            textPrinter.printPart(1, parts, names, structBuilder.articles.get(2-1));
+             parts.add(new Paragraph());
+            names.add("3a.");
+            textPrinter.printPart (parts, names, structBuilder.articles.get(81-1));
 
-            parts.add(new Point());
-            names.add("2)");
-            textPrinter.printPart(2, parts, names, structBuilder.articles.get(1));
-
-
+           parts.add(new Point());
+            names.add("1)");
+            textPrinter.printPart(parts, names, structBuilder.articles.get(81-1));
 
             parts.add(new Letter());
             names.add("b)");
+            textPrinter.printPart(parts, names, structBuilder.articles.get(81-1));
 
-            textPrinter.printPart(3, parts, names, structBuilder.articles.get(1));
+
+  /*          parts.add(new Letter());
+            names.add("b)");
+
 */
-
-
-
          bufferedReader.close();
 
         } catch (ParseException ex){
@@ -187,7 +183,13 @@ public class Main {
             parts.add(new Point());
             names.add("1)");
             textPrinter.printPart(2, parts, names, textInfos.articles.get(1));
+textPrinter.printPart(3, parts, names, structBuilder.articles.get(1));
 
+
+            textPrinter.printChapterOrSection(structBuilder, "VII", new Chapter());
+            textPrinter.printArticle(structBuilder, 55);
+            textPrinter.printArticles(structBuilder, 89,123);
+            textPrinter.printTableOfContentOfChapterOrSection(structBuilder, "II", new Chapter());
 
 
             parts.add(new Letter());
