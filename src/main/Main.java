@@ -41,7 +41,7 @@ public class Main {
                 textParser.isInLine();
                 structBuilder.writeInfo(textParser.getMatches(), textLine);
 
-                System.out.println(textLine);
+            //    System.out.println(textLine);
                 textLine = bufferedReader.readLine();
             } while(textLine != null);
 
@@ -103,7 +103,27 @@ public class Main {
             System.out.println("podałeś zły argument dla opcji mode");
         }
 
-            ArrayList<IPart> parts = new ArrayList<>();
+         bufferedReader.close();
+
+        } catch (ParseException ex){
+            System.out.println("Unexpected ParseException: " + ex.getMessage());
+            formatter.printHelp( " ", options );
+        } catch (IOException ex){
+            System.out.println("Unexpected IOException: " + ex.getMessage());
+        } catch (TestException ex){
+            System.out.println("TestException: " + ex.getMessage());
+        }
+    }
+}
+
+
+//        textPrinter.printSection(textInfos, "III");
+
+//textPrinter.printDown(textPrinter.findNextPart(new Point(), "1)", textInfos.articles.get(241).getDown()));
+
+/*
+
+              ArrayList<IPart> parts = new ArrayList<>();
             ArrayList<String> names = new ArrayList<>();
 
             textPrinter.printArticle(structBuilder, 81);
@@ -120,32 +140,18 @@ public class Main {
             names.add("b)");
             textPrinter.printPart(parts, names, structBuilder.articles.get(81-1));
 
+            textPrinter.printArticleWithLetter(structBuilder, 94, "b");
 
-  /*          parts.add(new Letter());
-            names.add("b)");
-
-*/
-         bufferedReader.close();
-
-        } catch (ParseException ex){
-
-            System.out.println("Unexpected ParseException: " + ex.getMessage());
-            formatter.printHelp( " ", options );
-
-        } catch (IOException ex){
-            System.out.println("Unexpected IOException: " + ex.getMessage());
-        } catch (ArrayIndexOutOfBoundsException ex){
-            System.out.println("Unexpected ArrayIndexOutOfBoundsException: " + ex.getMessage());
-        }
-    }
-}
+            PartFinder finder = new PartFinder();
+            IPart partToWrite = finder.findArticleWithLetter(structBuilder.articles.get(99-1), "b");
+            ArrayList<IPart> parts1 = new ArrayList<>();
+            ArrayList<String> names2 = new ArrayList<>();
+            parts1.add(new Paragraph());
+            names2.add("2.");
+            textPrinter.printPart (parts1, names2, partToWrite);
 
 
-//        textPrinter.printSection(textInfos, "III");
-
-//textPrinter.printDown(textPrinter.findNextPart(new Point(), "1)", textInfos.articles.get(241).getDown()));
-
-/*         textPrinter.printAll(textInfos);
+  textPrinter.printAll(textInfos);
          textPrinter.printTableOfContent(textInfos);
          textPrinter.printArticle(textInfos, 186);
          textPrinter.printArticles(textInfos, 15, 29);

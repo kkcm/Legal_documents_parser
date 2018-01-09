@@ -26,13 +26,13 @@ public class ObjectHierarchy {
                 Integer a;
                 for (a = i; a<objects.size(); a++){
                     if (objects.get(a).getClass().isAssignableFrom(o2.getClass())){
-                        System.out.println("klasa 2 NIE jest wyżej w hierarchi");
+     //                   System.out.println("klasa 2 NIE jest wyżej w hierarchi");
                         return false;
                     }
                 }
             }
         }
-        System.out.println("klasa 2 jest wyżej w hierarchi");
+    //    System.out.println("klasa 2 jest wyżej w hierarchi");
         return true;
     }
 

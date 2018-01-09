@@ -52,16 +52,16 @@ public class TextPrinter {
             do {
                 while (part.getUp() != null) {
                     part = part.getUp();
-                    System.out.println("wchodzę w górę");
+     //               System.out.println("wchodzę w górę");
                 }
                 while (part.getDown() != null && !hierarchy.isEqual(part, new Article()) && !hierarchy.isEqual(part, new ArticleWithLetter())) {
                     System.out.println(part.toString());
                     part = part.getDown();
-                    System.out.println("schodzę w dół");
+    //                System.out.println("schodzę w dół");
                 }
                 printDown(part);
                 part = part.getRight();
-                System.out.println("Spróbuję iść w prawo");
+    //            System.out.println("Spróbuję iść w prawo");
             } while (part != null);
         }
     }
@@ -79,6 +79,12 @@ public class TextPrinter {
         }
     }
 
+    public void printArticleWithLetter(StructBuilder struct, Integer num, String partName){
+        IPart article = struct.articles.get(num-1);
+        printDown(finder.findArticleWithLetter(article, partName));
+
+    }
+
     public void printChapterOrSection(StructBuilder struct, String chapterName, IPart object) {
         Integer art1 = finder.findChapterOrSection(struct, " " + chapterName, object);
         Integer art2 = finder.findNextChapterOrSection(struct, art1, object);
@@ -89,12 +95,12 @@ public class TextPrinter {
 
             while (part.getUp() != null) {
                 part = part.getUp();
-                System.out.println("wchodzę w górę");
+        //        System.out.println("wchodzę w górę");
             }
             while (part.getDown() != null && !hierarchy.isEqual(part, new Article()) && !hierarchy.isEqual(part, new ArticleWithLetter())) {
                 System.out.println(part.toString());
                 part = part.getDown();
-                System.out.println("schodzę w dół");
+                //       System.out.println("schodzę w dół");
             }
             writePart(part);
         }

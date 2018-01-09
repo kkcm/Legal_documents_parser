@@ -42,7 +42,7 @@ public class StructBuilder {
 
             if (matches.get(i)){
 
-                System.out.println(textInfo.get(i)); // do wyłączenia
+    //            System.out.println(textInfo.get(i)); // do wyłączenia
                 test = true;
 
                 if(textInfo.get(i).equals("litera/cyfra") || textInfo.get(i).equals("data") || textInfo.get(i).equals("kancelaria") ){
@@ -210,7 +210,7 @@ public class StructBuilder {
 
         ObjectHierarchy hierarchy = new ObjectHierarchy();
         if (!hierarchy.isHigher(this.last, newArticleWithLetter)) {
-            if (this.last.getClass().isAssignableFrom(newArticleWithLetter.getClass()) || this.last.getClass().isAssignableFrom(Article.class)) {
+            if (hierarchy.isEqual(this.last, newArticleWithLetter) || hierarchy.isEqual(this.last, new Article())) {
 //                System.out.println("poprzednia klasa też byla artykulem z literką albo samym artykułem");
                 newArticleWithLetter.setLeft(this.last);
                 this.last.setRight(newArticleWithLetter);
