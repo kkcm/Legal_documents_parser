@@ -70,7 +70,7 @@ public class TextPrinter {
         if (num > struct.articles.size() - 1) {
             throw new TestException("za duży indeks");
         }
-        writePart(struct.articles.get(num - 1));
+        writePart(struct.articles.get(num - 1));  //będzie trzeba chyba zmienić na printDown
     }
 
     public void printArticles(StructBuilder struct, Integer num1, Integer num2) {

@@ -2,14 +2,13 @@ package main;
 
 import org.apache.commons.cli.*;
 
-import java.io.BufferedReader;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) throws FileNotFoundException {
+
+        for (String arg : args )
+            System.out.println("Argument : " + arg);
 
         Options options = new Options();
         OptionsBuilder opt = new OptionsBuilder();
@@ -19,18 +18,19 @@ public class Main {
         CommandLineParser parser = new DefaultParser();
         CommandLine cmd;
 
-        try {
 
-            cmd = parser.parse(options, args);
+
+         try {
+           cmd = parser.parse(options, args);
+             CommandLineAnalizer cmdLineAnalizer = new CommandLineAnalizer(cmd);
+             cmdLineAnalizer.optionReader();
+
+
+     /*
             String inputFilePath = cmd.getOptionValue("input");
 
             FileReader fileReader = new FileReader(inputFilePath);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
-
-            for (String arg : args )
-                System.out.println("Argument : " + arg);
-
-
             StructBuilder structBuilder = new StructBuilder();
 
             String textLine = bufferedReader.readLine();
@@ -44,9 +44,9 @@ public class Main {
             //    System.out.println(textLine);
                 textLine = bufferedReader.readLine();
             } while(textLine != null);
+*/
 
-
-         TextPrinter textPrinter = new TextPrinter();
+/*         TextPrinter textPrinter = new TextPrinter();
          String mode = cmd.getOptionValue("mode");
         if (mode.equals("c")){
             System.out.println("wybrałeś opcję wyświetlania spisu treści");
@@ -104,12 +104,12 @@ public class Main {
         }
 
          bufferedReader.close();
-
+*/
         } catch (ParseException ex){
             System.out.println("Unexpected ParseException: " + ex.getMessage());
             formatter.printHelp( " ", options );
-        } catch (IOException ex){
-            System.out.println("Unexpected IOException: " + ex.getMessage());
+//        } catch (IOException ex){
+  //          System.out.println("Unexpected IOException: " + ex.getMessage());
         } catch (TestException ex){
             System.out.println("TestException: " + ex.getMessage());
         }
