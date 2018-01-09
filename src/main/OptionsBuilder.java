@@ -46,7 +46,7 @@ public class OptionsBuilder {
         this.articles = new Option("as", "articles", true, "wyświetla ciąg artykułów - np. -as 34 43");
         articles.setArgs(2);
 
-        this.articleWithLetter = new Option("al", "articleWithLetter", true, "pokaż artykuł z literą - podaj cyfrę, a po odstępie literę");
+        this.articleWithLetter = new Option("al", "articleWithLetter", true, "pokaż artykuł z literą - podaj cyfrę, a po odstępie literę - np. -al 105 a");
         articleWithLetter.setArgs(2);
 
         this.paragraph = new Option("p", "paragraph", true, "wyświetla ustęp - np. -p 3.");
@@ -58,7 +58,7 @@ public class OptionsBuilder {
         this.letter = new Option("l", "letter", true, "wyświetla literę - np. -l b)");
         letter.setArgs(1);
 
-        this.help = new Option("h", "help", false, "wyświetla tą isttrukcję");
+        this.help = new Option("h", "help", false, "wyświetla tą istrukcję");
 
     }
 
